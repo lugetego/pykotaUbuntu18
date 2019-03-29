@@ -1,0 +1,105 @@
+Instalación 
+
+copiar el directorio de pykota a  /usr/share/pykota
+
+#sudo pksetup ubuntu
+
+No agregar configuración de postgres 
+
+sudo checkdeps.py
+
+
+Instalación de postgesql
+----------------------------------------
+$ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+$ sudo apt install wget ca-certificates
+$ wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+$ sudo apt update
+$ sudo apt install postgresql-10 pgadmin4 phppgadmin
+------------------------------------------------
+
+Configuración postgres
+-------------------------------------------------------
+$ sudo systemctl enable postgresql.service
+
+abrir puerto en firewall
+$ sudo ufw allow from any to any port 5432 proto tcp
+
+
+/etc/postgresql/10/main/pg_hba.conf
+
+# DO NOT DISABLE!
+# If you change this first entry you will need to make sure that the
+# database superuser can access the database using some other method.
+# Noninteractive access to all databases is required during automatic
+# maintenance (custom daily cronjobs, replication, and similar tasks).
+#
+# Database administrative login by Unix domain socket
+local   all             postgres                                trust
+
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+# "local" is for Unix domain socket connections only
+local   all             all                                     md5
+local   pykota          pykotaadmin,pykotauser                  md5
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            md5
+# IPv6 local connections:
+host    all             all             ::1/128                 md5
+# Allow replication connections from localhost, by a user with the
+# replication privilege.
+local   replication     all                                     peer
+host    replication     all             127.0.0.1/32            md5
+host    replication     all             ::1/128                 md5
+
+Configuración base de datos pykota
+----------------------------------------------------------------------------
+ su - postgres -c "psql -f /usr/share/pykota/initscripts/postgresql/pykota-postgresql.sql template1"
+
+-----------------------------------------------------------------------
+Comandos pykota 
+pkusers --list
+pkprinters --list
+pkprinters --add impresora
+pkusers --add user
+edpykota --add user
+
+-----------------------------------------------------------------------
+Logs pykota
+
+ccmunam@ccmunam-VPCSB25FL:/usr/share/pykota/ccm$ cat /etc/rsyslog.d/30-pykota.conf 
+if $programname == 'PyKota' then /var/log/pykota/pykota.log
+& stop
+
+sudo mkdir -p /var/log/pykota
+$ sudo chown syslog:adm /var/log/pykota
+$ sudo chmod 755 /var/log/pykota
+$ sudo systemctl restart rsyslog
+
+rotación
+
+ccmunam@ccmunam-VPCSB25FL:/usr/share/pykota/ccm$ cat /etc/logrotate.d/pykota 
+/var/log/pykota/pykota.log
+{
+	rotate 4
+	weekly
+	missingok
+	notifempty
+	compress
+	delaycompress
+	sharedscripts
+	postrotate
+		invoke-rc.d rsyslog rotate >/dev/null 2>&1 || true
+	endscript
+}
+
+-----------------------------------------------------------------------
+apparmor
+
+sudo service apparmor teardown
+sudo service apparmor status
+
+
+Links
+https://forge.univention.org/bugzilla/attachment.cgi?id=9460&action=diff
+
