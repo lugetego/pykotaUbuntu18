@@ -72,6 +72,42 @@ configuración apache
         Require ip xxx.xxx.xxx.xxx
 </Directory>
 
+-----------------------------------------------------------------------------
+Instalación python2.7
+-----------------------------------------------------------------------------
+sudo apt-get install python        
+
+-----------------------------------------------------------------------------
+Dependencias pykota
+-----------------------------------------------------------------------------
+/usr/share/pykota
+
+python checkdeps.py 
+Checking for Python-PygreSQL availability : NO.
+Checking for Python-egenix-mxDateTime availability : NO.
+Checking for Python-OSD availability : NO.
+Checking for Python-SNMP availability : NO.
+Checking for Python-Imaging availability : NO.
+*Checking for Python-pkpgcounter availability : NO.
+Checking for Python-PAM availability : NO.
+**Checking for Python-pkipplib availability : NO.
+Checking for Python-chardet availability : NO.
+
+apt-get install python-pygresql python-egenix-mxdatetime python-osd python-pysnmp4 python-sane python-chardet
+
+* http://www.pykota.com/software/pkpgcounter/download
+http://www.pykota.com/software/pkpgcounter/download/tarballs/pkpgcounter-3.50.tar.gz
+$ cd /tmp
+$ tar -zxf pkpgcounter-x.yy.tar.gz
+$ cd pkpgcounter-x.yy
+$ python setup.py install
+
+**http://www.pykota.com/software/pkipplib/download
+http://www.pykota.com/software/pkipplib/download/tarballs/pkipplib-0.07.tar.gz
+$ cd /tmp
+$ tar -zxf pkipplib-x.yy.tar.gz
+$ cd pkipplib-x.yy
+$ python setup.py install
 
 
 -------------------------------------------------------------------------------
