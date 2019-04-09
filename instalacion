@@ -52,6 +52,29 @@ local   replication     all                                     peer
 host    replication     all             127.0.0.1/32            md5
 host    replication     all             ::1/128                 md5
 
+
+-------------------------------------------------------------------------------
+Configuración phppgadmin
+
+/etc/apache2/conf-available/phppgadmin.conf
+
+# Only allow connections from localhost:
+#Require local
+Require all granted
+
+configuración apache 
+
+/etc/apache2
+
+<Directory /usr/share/phppgadmin/>
+        Options -Indexes +FollowSymLinks
+        AllowOverride None
+        Require ip xxx.xxx.xxx.xxx
+</Directory>
+
+
+
+-------------------------------------------------------------------------------
 Configuración base de datos pykota
 ----------------------------------------------------------------------------
  su - postgres -c "psql -f /usr/share/pykota/initscripts/postgresql/pykota-postgresql.sql template1"
