@@ -627,6 +627,10 @@ KLimit 0
 OpPolicy default
 ErrorPolicy retry-job
 </DefaultPrinter>
-~                           
+---------------------------------------------------------------------                           
+Backend pykota
+---------------------------------------------------------------------
 
+rm - rf /usr/lib/cups/backend/cupspykota
+ln -s /usr/share/pykota/bin/cupspykota cupspykota
 
