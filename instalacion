@@ -526,7 +526,7 @@ ccmunam@ccmunam-VPCSB25FL:/usr/share/pykota/ccm$ cat /etc/logrotate.d/pykota
 	delaycompress
 	sharedscripts
 	postrotate
-		invoke-rc.d rsyslog rotate >/dev/null 2>&1 || true
+	invoke-rc.d rsyslog rotate >/dev/null 2>&1 || true
 	endscript
 }
 
@@ -633,4 +633,7 @@ Backend pykota
 
 rm - rf /usr/lib/cups/backend/cupspykota
 ln -s /usr/share/pykota/bin/cupspykota cupspykota
+chown root.root cupspykota
+chmod 700 cupspykota
+
 
