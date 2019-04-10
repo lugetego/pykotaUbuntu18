@@ -473,6 +473,24 @@ Agregar
 CREATE USER pykotauser WITH ENCRYPTED PASSWORD 'password';
 CREATE USER pykotaadmin WITH ENCRYPTED PASSWORD 'password';
 
++CREATE USER pykotauser WITH UNENCRYPTED PASSWORD 'readonlypw' NOCREATEDB;
++CREATE USER pykotaadmin WITH UNENCRYPTED PASSWORD 'readwritepw' NOCREATEDB;
+ 
+comentar en 
+/usr/share/pykota/pykota/storages/pgstorage.py 
+/usr/local/lib/python2.7/dist-packages/pykota/storages/pgstorage.py
+
+#            self.quote = self.database._quote
+#        except AttributeError : # pg <v4.x
+#            self.quote = pg._quote
+#        try :
+
+sustituir 
+
+#       return self.quote(field, typ)
+        return self.database.adapter.adapt_inline(field)
+
+
  su - postgres -c "psql -f /usr/share/pykota/initscripts/postgresql/pykota-postgresql.sql template1"
 
 -----------------------------------------------------------------------
