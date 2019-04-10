@@ -598,6 +598,9 @@ WebInterface Yes
   Allow 132.248.xxx.*
 </Location>
 
+Habilitar la administración remota
+
+sudo cupsctl --remote-admin
 
 printers.conf
 
