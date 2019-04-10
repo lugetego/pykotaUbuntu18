@@ -2,13 +2,6 @@ Instalación
 
 copiar el directorio de pykota a  /usr/share/pykota
 
-#sudo pksetup ubuntu
-
-No agregar configuración de postgres 
-
-sudo checkdeps.py
-
-
 Instalación de postgesql
 ----------------------------------------
 $ sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
@@ -109,10 +102,377 @@ $ tar -zxf pkipplib-x.yy.tar.gz
 $ cd pkipplib-x.yy
 $ python setup.py install
 
+------------------------------------------------------------------------------
+Instalador pykota
+------------------------------------------------------------------------------
+/usr/share/pykota/
+python setup.py install
 
--------------------------------------------------------------------------------
+pksetup ubuntu
+
+First you MUST switch ALL your printers ON. Are ALL your printers ON ? y
+What is the name of the print administrator ? admin
+What is the email address of the print administrator ? user@mail.mx
+What is your DNS domain name ? mail.mx
+What is the hostname or IP address of your SMTP server ? xxx.xxx.xxx.xxx
+
+The following command will be launched to create a system user named 'pykota' :
+adduser --system --group --home /etc/pykota --gecos PyKota pykota
+Do you agree ? y
+Adding system user `pykota' (UID 124) ...
+Adding new group `pykota' (GID 128) ...
+Adding new user `pykota' (UID 124) with group `pykota' ...
+Creating home directory `/etc/pykota' ...
+
+The following command will be launched to grab an up-to-date list of available packages :
+apt-get update
+Do you agree ? y
+Hit:1 http://mx.archive.ubuntu.com/ubuntu bionic InRelease
+Hit:2 http://security.ubuntu.com/ubuntu bionic-security InRelease
+Hit:3 http://apt.postgresql.org/pub/repos/apt bionic-pgdg InRelease
+Hit:4 http://mx.archive.ubuntu.com/ubuntu bionic-updates InRelease
+Hit:5 http://mx.archive.ubuntu.com/ubuntu bionic-backports InRelease
+Reading package lists... Done                      
+
+The following command will be launched to put your system up-to-date :
+apt-get -y dist-upgrade
+Do you agree ? y
+The following command will be launched to put your system up-to-date :
+apt-get -y dist-upgrade
+Do you agree ? y
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Calculating upgrade... Done
+The following NEW packages will be installed:
+  libllvm7 libwayland-egl1
+The following packages will be upgraded:
+  libcogl20 libgail-3-0 libgl1-mesa-dri libgtk-3-0 libgtk-3-bin libwayland-egl1-mesa libxatracker2
+7 upgraded, 2 newly installed, 0 to remove and 0 not upgraded.
+Need to get 0 B/26.5 MB of archives.
+After this operation, 75.5 MB of additional disk space will be used.
+(Reading database ... 177204 files and directories currently installed.)
+Preparing to unpack .../0-libcogl20_1.22.2-3ubuntu1_amd64.deb ...
+Unpacking libcogl20:amd64 (1.22.2-3ubuntu1) over (1.22.2-3) ...
+Preparing to unpack .../1-libgail-3-0_3.22.30-1ubuntu2_amd64.deb ...
+Unpacking libgail-3-0:amd64 (3.22.30-1ubuntu2) over (3.22.30-1ubuntu1) ...
+Preparing to unpack .../2-libgtk-3-0_3.22.30-1ubuntu2_amd64.deb ...
+Unpacking libgtk-3-0:amd64 (3.22.30-1ubuntu2) over (3.22.30-1ubuntu1) ...
+Preparing to unpack .../3-libwayland-egl1-mesa_18.2.8-0ubuntu0~18.04.2_amd64.deb ...
+Unpacking libwayland-egl1-mesa:amd64 (18.2.8-0ubuntu0~18.04.2) over (18.0.5-0ubuntu0~18.04.1) ...
+Selecting previously unselected package libwayland-egl1:amd64.
+Preparing to unpack .../4-libwayland-egl1_1.16.0-1ubuntu1.1~18.04.1_amd64.deb ...
+Unpacking libwayland-egl1:amd64 (1.16.0-1ubuntu1.1~18.04.1) ...
+Selecting previously unselected package libllvm7:amd64.
+Preparing to unpack .../5-libllvm7_1%3a7-3~ubuntu0.18.04.1_amd64.deb ...
+Unpacking libllvm7:amd64 (1:7-3~ubuntu0.18.04.1) ...
+Preparing to unpack .../6-libgl1-mesa-dri_18.2.8-0ubuntu0~18.04.2_amd64.deb ...
+Unpacking libgl1-mesa-dri:amd64 (18.2.8-0ubuntu0~18.04.2) over (18.0.5-0ubuntu0~18.04.1) ...
+Preparing to unpack .../7-libgtk-3-bin_3.22.30-1ubuntu2_amd64.deb ...
+Unpacking libgtk-3-bin (3.22.30-1ubuntu2) over (3.22.30-1ubuntu1) ...
+Preparing to unpack .../8-libxatracker2_18.2.8-0ubuntu0~18.04.2_amd64.deb ...
+Unpacking libxatracker2:amd64 (18.2.8-0ubuntu0~18.04.2) over (18.0.5-0ubuntu0~18.04.1) ...
+Setting up libllvm7:amd64 (1:7-3~ubuntu0.18.04.1) ...
+Setting up libgl1-mesa-dri:amd64 (18.2.8-0ubuntu0~18.04.2) ...
+Installing new version of config file /etc/drirc ...
+Setting up libxatracker2:amd64 (18.2.8-0ubuntu0~18.04.2) ...
+Processing triggers for libc-bin (2.27-3ubuntu1) ...
+Processing triggers for man-db (2.8.3-2ubuntu0.1) ...
+Setting up libwayland-egl1:amd64 (1.16.0-1ubuntu1.1~18.04.1) ...
+Setting up libcogl20:amd64 (1.22.2-3ubuntu1) ...
+Setting up libgtk-3-0:amd64 (3.22.30-1ubuntu2) ...
+Setting up libgtk-3-bin (3.22.30-1ubuntu2) ...
+Setting up libwayland-egl1-mesa:amd64 (18.2.8-0ubuntu0~18.04.2) ...
+Setting up libgail-3-0:amd64 (3.22.30-1ubuntu2) ...
+Processing triggers for libc-bin (2.27-3ubuntu1) ...
+
+The following command will be launched to install missing dependencies :
+apt-get install wget bzip2 subversion postgresql postgresql-client pkpgcounter cupsys cupsys-client python-dev python-jaxml python-reportlab python-reportlab-accel python-psyco python-pygresql python-osd python-egenix-mxdatetime python-imaging python-pysnmp4 python-chardet python-pam
+Do you agree ? y
+Reading package lists... Done
+Building dependency tree       
+Reading state information... Done
+Package python-psyco is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+
+Package python-imaging is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+However the following packages replace it:
+  python-pil:i386 python-pil
+
+Package cupsys-client is not available, but is referred to by another package.
+This may mean that the package is missing, has been obsoleted, or
+is only available from another source
+
+E: Unable to locate package pkpgcounter
+E: Unable to locate package cupsys
+E: Package 'cupsys-client' has no installation candidate
+E: Package 'python-psyco' has no installation candidate
+E: Package 'python-imaging' has no installation candidate
+
+Downloading additional software not available as packages in /tmp/tmpzzaPZr
+
+The following command will be launched to download pkipplib :
+wget "http://www.pykota.com/software/pkipplib/download/tarballs/pkipplib-0.07.tar.gz"
+Do you agree ? y
+--2019-04-10 09:46:17--  http://www.pykota.com/software/pkipplib/download/tarballs/pkipplib-0.07.tar.gz
+Resolving www.pykota.com (www.pykota.com)... 92.243.13.115
+Connecting to www.pykota.com (www.pykota.com)|92.243.13.115|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 18704 (18K) [application/x-tar]
+Saving to: ‘pkipplib-0.07.tar.gz’
+
+pkipplib-0.07.tar.gz                         100%[=============================================================================================>]  18.27K  87.4KB/s    in 0.2s    
+
+2019-04-10 09:46:18 (87.4 KB/s) - ‘pkipplib-0.07.tar.gz’ saved [18704/18704]
+
+
+The following command will be launched to install pkipplib :
+tar -zxf pkipplib-0.07.tar.gz && cd pkipplib-0.07 && python setup.py install
+Do you agree ? yy
+running install
+running build
+running build_py
+creating build
+creating build/lib.linux-x86_64-2.7
+creating build/lib.linux-x86_64-2.7/pkipplib
+copying pkipplib/__init__.py -> build/lib.linux-x86_64-2.7/pkipplib
+copying pkipplib/version.py -> build/lib.linux-x86_64-2.7/pkipplib
+copying pkipplib/pkipplib.py -> build/lib.linux-x86_64-2.7/pkipplib
+running build_scripts
+creating build/scripts-2.7
+copying and adjusting bin/pksubscribe -> build/scripts-2.7
+changing mode of build/scripts-2.7/pksubscribe from 644 to 755
+running install_lib
+running install_scripts
+copying build/scripts-2.7/pksubscribe -> /usr/local/bin
+changing mode of /usr/local/bin/pksubscribe to 755
+running install_egg_info
+Removing /usr/local/lib/python2.7/dist-packages/pkipplib-0.07.egg-info
+Writing /usr/local/lib/python2.7/dist-packages/pkipplib-0.07.egg-info
+
+The following command will be launched to download ghostpdl :
+wget "http://mirror.cs.wisc.edu/pub/mirrors/ghost/GPL/ghostpdl/ghostpdl-1.54.tar.bz2"
+Do you agree ? y
+--2019-04-10 09:47:55--  http://mirror.cs.wisc.edu/pub/mirrors/ghost/GPL/ghostpdl/ghostpdl-1.54.tar.bz2
+Resolving mirror.cs.wisc.edu (mirror.cs.wisc.edu)... failed: Name or service not known.
+wget: unable to resolve host address ‘mirror.cs.wisc.edu’
+
+The following command will be launched to install ghostpdl :
+bunzip2 <ghostpdl-1.54.tar.bz2 | tar -xf - && cd ghostpdl-1.54 && wget http://mirror.cs.wisc.edu/pub/mirrors/ghost/AFPL/GhostPCL/urwfonts-1.41.tar.bz2 && bunzip2 <urwfonts-1.41.tar.bz2 | tar -xf - && mv urwfonts-1.41 urwfonts && make fonts && make pcl && make install
+Do you agree ? y
+sh: 1: cannot open ghostpdl-1.54.tar.bz2: No such file
+tar: This does not look like a tar archive
+tar: Exiting with failure status due to previous errors
+
+The following command will be launched to remove the temporary directory /tmp/tmpzzaPZr :
+rm -fr /tmp/tmpzzaPZr
+Do you agree ? y
+
+The following command will be launched to find PostgreSQL's configuration files :
+find /etc -name postgresql.conf 2>/dev/null
+Do you agree ? y
+
+The following command will be launched to see if PostgreSQL accepts TCP/IP connections :
+grep ^tcpip_socket /etc/postgresql/10/main/postgresql.conf
+Do you agree ? y
+
+The following command will be launched to configure PostgreSQL correctly for PyKota :
+echo "local	all	postgres		ident sameuser
+local	pykota	pykotaadmin,pykotauser		md5
+local	all	all		ident sameuser
+host	all	all	127.0.0.1	255.255.255.255	ident sameuser
+host	all	all	::1	ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff	reject
+host	all	all	::ffff:127.0.0.1/128	reject
+host	all	all	0.0.0.0	0.0.0.0	reject" >/etc/postgresql/10/main/pg_hba.conf
+
+IMPORTANTE!!
+
+Do you agree ? n
+
+The following command will be launched to make PostgreSQL take the changes into account :
+/etc/init.d/postgresql* restart
+Do you agree ? y
+[ ok ] Restarting postgresql (via systemctl): postgresql.service.
+
+The following command will be launched to generate PyKota's main configuration file :
+echo "#
+# This is a generated configuration file for PyKota
+#
+# IMPORTANT : many more directives can be used, and some of the directives
+# below accept different and/or more complex parameters. Please read
+# /usr/share/pykota/conf/pykota.conf.sample for more details about the
+# numerous possibilities allowed.
+#
+[global]
+
+# Database settings
+storagebackend : pgstorage
+storageserver : 
+storagename : pykota
+storageuser : pykotauser
+storageuserpw : readonlypw
+storagecaching : No
+disablehistory : No
+
+# Logging method
+logger : system
+
+# Set debug to Yes during installation and testing
+debug : Yes
+
+# Who should receive automatic bug reports ?
+crashrecipient : pykotacrashed@librelogiciel.com
+
+# Should we keep temporary files on disk ?
+# Set this to yes for debugging software accounting problems
+keepfiles : no
+
+# Logos for banners and CGI scripts
+logourl : http://www.pykota.com/pykota.png
+logolink : http://www.pykota.com/
+
+# SMTP
+smtpserver : xxx.xxx.xxx.xxx
+maildomain : mail.mx
+
+# Print Administrator
+admin : admin
+adminmail : admin@mail.mx
+
+# Use usernames as-is or convert them to lowercase or uppercase ?
+usernamecase : native
+
+# Should we hide some fields in the history (title, filename) ?
+privacy : no
+
+# Should we charge end users when an error occurs ?
+onbackenderror : nocharge
+
+# Default accounting methods :
+preaccounter : software()
+accounter : software()
+onaccountererror : stop
+
+# Who will receive warning messages ?
+# both means admin and user.
+mailto : both
+
+# Grace delay for pages based quotas, works the same
+# as for disk quotas
+gracedelay : 7
+
+# Configurable zero, to give free credits
+balancezero : 0.0
+
+# Warning limit for credit based quotas
+poorman : 1.0
+
+# Warning messages to use
+poorwarn : Your Print Quota account balance is low.
+ Soon you'll not be allowed to print anymore.
+
+softwarn : Your Print Quota Soft Limit is reached.
+ This means that you may still be allowed to print for some
+ time, but you must contact your administrator to purchase
+ more print quota.
+
+hardwarn : Your Print Quota Hard Limit is reached.
+ This means that you are not allowed to print anymore.
+ Please contact your administrator at root@localhost
+ as soon as possible to solve the problem.
+
+# Number of banners allowed to be printed by users
+# who are over quota
+maxdenybanners : 0
+
+# Should we allow users to ever be over quota on their last job ?
+# strict means no.
+enforcement : strict
+
+# Should we trust printers' internal page counter ?
+trustjobsize : yes
+
+# How to handle duplicate jobs
+denyduplicates : no
+duplicatesdelay : 0
+
+
+# What should we do when an unknown user prints ?
+# The policy below will automatically create a printing account
+# for unknown users, allowing them to print with no limit on the
+# current printer.
+policy : external(pkusers --add --skipexisting --limitby noquota --description "Added automatically" \$PYKOTAUSERNAME && edpykota --add --skipexisting --printer \$PYKOTAPRINTERNAME \$PYKOTAUSERNAME)
+
+" >/etc/pykota/pykota.conf
+Do you agree ? y
+
+The following command will be launched to generate PyKota's administrators configuration file :
+echo "[global]
+storageadmin: user
+storageadminpw: password" >/etc/pykota/pykotadmin.conf
+Do you agree ? y
+
+The following command will be launched to change permissions on PyKota's administrators configuration file :
+chmod 640 /etc/pykota/pykotadmin.conf
+Do you agree ? y
+
+The following command will be launched to change permissions on PyKota's main configuration file :
+chmod 644 /etc/pykota/pykota.conf
+Do you agree ? y
+
+The following command will be launched to change ownership of PyKota's configuration files :
+chown pykota.pykota /etc/pykota/pykota.conf /etc/pykota/pykotadmin.conf
+Do you agree ? y
+
+The following command will be launched to automatically detect the best settings for your printers :
+pkturnkey --doconf 2>/dev/null
+Do you agree ? y
+
+The following command will be launched to create PyKota's database in PostgreSQL :
+su - postgres -c "psql -f /usr/share/pykota/postgresql/pykota-postgresql.sql template1"
+Do you agree ? y
+/usr/share/pykota/postgresql/pykota-postgresql.sql: No such file or directory
+
+Comando no funciona, ejecutar en la siguiente sección 
+
+The following command will be launched to make PyKota known to CUPS :
+ln -s /usr/share/pykota/cupspykota /usr/lib/cups/backend/cupspykota
+Do you agree ? y
+
+The following command will be launched to restart CUPS for the changes to take effect :
+/etc/init.d/cupsys restart
+Do you agree ? y
+sh: 1: /etc/init.d/cupsys: not found
+
+PyKota is now ready to run !
+
+Before printing, you still have to manually modify CUPS' printers.conf
+to manually prepend cupspykota:// in front of each DeviceURI.
+
+Once this is done, just restart CUPS and all should work fine.
+
+Please report any problem to : alet@librelogiciel.com
+
+Thanks in advance.
+
+The script /tmp/pykota-installer.sh can be used to reinstall in unattended mode.
+
+------------------------------------------------------------------------------
 Configuración base de datos pykota
 ----------------------------------------------------------------------------
+Modificar lineas
+/usr/share/pykota/initscripts/postgresql/pykota-postgresql.sql template1
+
+Comentar
+--CREATE USER pykotauser WITH UNENCRYPTED PASSWORD 'readonlypw' NOCREATEDB NOCREATEUSER;
+--CREATE USER pykotaadmin WITH UNENCRYPTED PASSWORD 'readwritepw' NOCREATEDB NOCREATEUSER;
+Agregar
+CREATE USER pykotauser WITH ENCRYPTED PASSWORD 'password';
+CREATE USER pykotaadmin WITH ENCRYPTED PASSWORD 'password';
+
  su - postgres -c "psql -f /usr/share/pykota/initscripts/postgresql/pykota-postgresql.sql template1"
 
 -----------------------------------------------------------------------
