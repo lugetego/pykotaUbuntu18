@@ -636,4 +636,42 @@ ln -s /usr/share/pykota/bin/cupspykota cupspykota
 chown root.root cupspykota
 chmod 700 cupspykota
 
+------------------------------------------------------------------------
+Configuración samba
+------------------------------------------------------------------------
+ apt-get install samba
 
+modificación al archivo /etc/samba/smbd.conf
+
+# What naming service and in what order should we use to resolve host names
+# to IP addresses
+;   name resolve order = lmhosts host wins bcast
+  #hosts deny = ALL
+  hosts allow = 127.0.0.1 xxx.xxx.xxx.0/24
+  valid users = user1, user2
+  
+  ####### Authentication #######
+
+# Server role. Defines in which mode Samba will operate. Possible
+# values are "standalone server", "member server", "classic primary
+# domain controller", "classic backup domain controller", "active
+# directory domain controller".
+#
+# Most people will want "standalone sever" or "member server".
+# Running as "active directory domain controller" will require first
+# running "samba-tool domain provision" to wipe databases and create a
+# new domain.
+   security = user
+   server role = standalone server
+   encrypt passwords = true
+
+[printers]
+    comment = All Printers
+    path = /var/spool/samba
+    browseable = yes
+    guest ok =  no
+    writable = no
+    printable = yes
+    printing=cups
+
+  
