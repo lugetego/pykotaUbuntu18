@@ -542,7 +542,7 @@ https://forge.univention.org/bugzilla/attachment.cgi?id=9460&action=diff
 
 
 -----------------------------------------------------------------------
-En los clientes agregar la impresora deirectamente al servidor pero sin driver
+En los clientes agregar la impresora deirectamente al servidor pero el driver tiene que se postscript
 
 cola de impresión
 
