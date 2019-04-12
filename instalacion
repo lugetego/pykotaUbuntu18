@@ -469,12 +469,16 @@ Modificar lineas
 Comentar
 --CREATE USER pykotauser WITH UNENCRYPTED PASSWORD 'readonlypw' NOCREATEDB NOCREATEUSER;
 --CREATE USER pykotaadmin WITH UNENCRYPTED PASSWORD 'readwritepw' NOCREATEDB NOCREATEUSER;
-Agregar
+
+Agregar cualquiera de las dos opciones, las dos funcionan
+
 CREATE USER pykotauser WITH ENCRYPTED PASSWORD 'password';
 CREATE USER pykotaadmin WITH ENCRYPTED PASSWORD 'password';
 
-+CREATE USER pykotauser WITH UNENCRYPTED PASSWORD 'readonlypw' NOCREATEDB;
-+CREATE USER pykotaadmin WITH UNENCRYPTED PASSWORD 'readwritepw' NOCREATEDB;
+o
+
+CREATE USER pykotauser WITH UNENCRYPTED PASSWORD 'readonlypw' NOCREATEDB;
+CREATE USER pykotaadmin WITH UNENCRYPTED PASSWORD 'readwritepw' NOCREATEDB;
  
 comentar en 
 /usr/share/pykota/pykota/storages/pgstorage.py 
